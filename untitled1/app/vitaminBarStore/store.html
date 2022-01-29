@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vitamin Bar Order Online </title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
+    <script src="store.js" async></script>
+    <link rel="stylesheet" href="vitaminBarCart.css">
+
+</head>
+<body onload="getMenu()">
+<header class="main-header">
+    <nav class="main-nav">
+        <a href="index.html">HOME</a>
+        <div class="dropdown">
+            <a href="store.html">STORE</a>
+            <div class="dropdown-content">
+                <a href="#"> Milk Tea</a>
+                <a href="#"> Juice</a>
+            </div>
+        </div>
+        <a href="about.html">ABOUT</a>
+    </nav>
+    <h1 class="band-name"> Vitamin Bar </h1>
+</header>
+
+<div class="cart-btn">
+    <button type="button" onclick="openCart()">
+        <i class="fas fa-shopping-cart"></i><i id="count"></i></button>
+</div>
+<div>
+    <form>
+        <label for="searching">Searching beverage</label>
+        <input type="text" id="searching">
+        <button type="button" onclick="searchingBeverage(document.getElementById('searching').value)">
+            <i class="fas fa-search"></i></button>
+    </form>
+    <div class="searching-popup" id="searching-popup">
+        <div class="searching-box">
+            <div class="result">
+
+                <span class="item-name"></span>
+                <img class="item-image"
+                     src="https://data.thefeedfeed.com/static/2019/06/05/15597629795cf81823d037c.jpg"
+                     width="300" height="250">
+                <div>
+                    <span class="item-price"></span>
+                    <input class="cart-quantity-input " type="number" value="1">
+                    <button class=" button button-primary add-btn-from-searching" type="button">Add To Cart</button>
+                </div>
+                <button class="close-searching-btn" type="button" onclick="closeSearching()"><i class="far fa-times-circle"></i></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h1 class="session-header"> Menu </h1>
+<div class="container content-session">
+    <div class="big-class"></div>
+</div>
+
+<div class="cart-popup" id="my-cart">
+    <div class="cart-row cart-box">
+        <span class="cart-item cart-header cart-column">Item</span>
+        <span class="cart-price cart-header cart-column">Price</span>
+        <span class="cart-quantity cart-header cart-column">Quantity</span>
+        <!--        <span class="cart-total-per-item cart-header cart-column">TOTAL</span>-->
+    </div>
+    <div class="cart-items">
+    </div>
+
+    <div class="cart-total">
+        <strong class="cart-total-title">Total</strong>
+        <span class="cart-total-price">$0</span>
+    </div>
+    <button class="cart-purchase-btn" type="button" onclick="purchaseClicked()">Purchase</button>
+<!--    <button class="cart-purchase-btn" type="button"  id ='cart-purchase-btn-id'>Purchase</button>-->
+    <button class="close-cart-btn" type="button" onclick="closeCart()">Close</button>
+</div>
+
+<footer class="main-footer">
+    <div class="container main-footer-container">
+        <h3 class="band-name"> The Vitamin Bar</h3>
+        <ul class="nav footer-nav">
+            <li>
+                <a href="https://www.facebook.com/profile.php?id=100003049977515">
+                    <img src="https://www.facebook.com/images/fb_icon_325x325.png" width="25" height="25">
+                </a>
+            </li>
+
+            <li><img
+                    src="https://static.vecteezy.com/system/resources/thumbnails/000/420/369/small/Road_Signs_2__2882_29.jpg"
+                    width="25" height="25"></li>
+
+            <li><img src="https://www.clipartmax.com/png/middle/118-1182314_red-address-icon-red-png.png" width="25"
+                     height="25"></li>
+        </ul>
+    </div>
+</footer>
+</body>
+</html>
