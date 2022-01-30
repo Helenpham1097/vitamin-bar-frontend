@@ -8,25 +8,28 @@ if (document.readyState === 'loading') {
     ready();
 }
 
-// const cart = [];
-// const customerInfo = [{"name": "Rose",
-//     "dateOfBirth": "1997-02-27",
-//     "phone": "0377930451",
-//     "email": "roserose@gmail.com",
-//     "deliveryAddress": "2 Spencer Road, Auckland",
-//     "point": 0}];
-// let totalBill =0;
-// const billInfo = [{"orderNumber":"THTR10030810", "total": totalBill}];
+const cart = [];
+
+let customerInfo =
+    '{\n' +
+    '  "phone": "02135689202",\n' +
+    '  "customer": {\n' +
+    '    "name": "Heo Mi Nhon",\n' +
+    '    "dateOfBirth": "1997-02-27",\n' +
+    '    "phone": "02135689202",\n' +
+    '    "email": "heominhon@gmail.com",\n' +
+    '    "deliveryAddress": "24 Eastcoast Road, Auckland",\n' +
+    '    "point": 0\n' +
+    '  },';
 
 
-//$(document).ready(ready());
+const billInfo = {orderNumber: "HELTHA1038", totalBill: 0};
+
+function getBill() {
+    return '"order": { "orderNumber":' + '"' + billInfo.orderNumber + '", "totalBill":' + billInfo.totalBill + '},';
+}
 
 function ready() {
-    // const removeItemsFromCart = document.getElementsByClassName('button-danger');
-    // for (let i = 0; i < removeItemsFromCart.length; i++) {
-    //     let button = removeItemsFromCart[i];
-    //     button.addEventListener('click', removeCartItemEvent);
-    // }
     const removeItemsFromCart = document.getElementsByClassName('button-danger');
     for (let i = 0; i < removeItemsFromCart.length; i++) {
         let button = removeItemsFromCart[i];
@@ -44,57 +47,49 @@ function ready() {
         button.addEventListener('click', addToCartClicked);
     }
 
-    const addToCartFromSearching = document.getElementsByClassName('add-btn-from-searching');
-    for (let i = 0; i < addToCartFromSearching.length; i++) {
-        let button = addToCartFromSearching[i];
-        button.addEventListener('click', addToCartClickedFromSearching);
-    }
-
     document.getElementsByClassName('cart-purchase-btn')[0].addEventListener('click', purchaseClicked);
 
 
 }
 
-// function ready{// $('cart-purchase-btn-id').click(function () {
-//     $.post("https://reqres.in/api/users/", {
-//         data: createPurchasePostPayload(),
-//         function(status) {
-//             window.alert(status);
-//         }
-//     })
-// });}
-
-
-function removeCartItemEvent(event) {
-    let buttonClicked = event.target;
-    buttonClicked.parentElement.parentElement.remove();
+function removeCartItemEvent(title) {
+    const cartItemName = document.getElementsByClassName('cart-item-title');
+    for (let i = 0; i < cartItemName.length; i++) {
+        if (cartItemName[i].innerText === title) {
+            cartItemName[i].parentElement.parentElement.remove();
+        }
+    }
     updateCartTotal();
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (item.title == title) {
+            cart.splice(i, 1);
+        }
+    }
 }
 
-// function removeCartItemEvent(itemName) {
-//     let buttonClicked = event.target;
-//     buttonClicked.parentElement.parentElement.remove();
-//     updateCartTotal();
-// }
+function quantityChanged(title) {
+    const cartItemName = document.getElementsByClassName('cart-item-title');
+    let quantity = 0;
+    for (let i = 0; i < cartItemName.length; i++) {
+        if (cartItemName[i].innerText === title) {
+            cartItemName[i].getElementsByClassName('cart-quantity-input').value = 1;
+            let item = cartItemName[i].parentElement.parentElement.getElementsByClassName('cart-quantity-input')[0].value;
+            window.alert(item);
+            quantity = item;
+        }
+    }
 
-function quantityChanged(event) {
-    let input = event.target;
-    if (isNaN(input.value) || input.value <= 0) {
-        input.value = 1;
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (item.title == title) {
+            item.quantity = quantity;
+        }
     }
     updateCartTotal();
 }
 
 function purchaseClicked() {
-    // let checkCart = document.getElementsByClassName('cart-items')[0];
-    // let x;
-    // if(checkCart.value === x){
-    //     window.alert("Empty Cart");
-    // }
-    // if(checkCart.value!== x){
-    //     window.alert("lala");
-    // }
-
     let checkCart = document.getElementsByClassName('cart-total')[0];
     let totalElement = checkCart.getElementsByClassName('cart-total-price')[0];
     let total = parseFloat(totalElement.innerText.replace('$', ''));
@@ -103,6 +98,7 @@ function purchaseClicked() {
     }
     if (total > 0) {
         window.alert("Thank you for shopping with us");
+        window.alert(billInfo.totalBill);;
     }
 
     let cartItems = document.getElementsByClassName('cart-items')[0];
@@ -113,39 +109,15 @@ function purchaseClicked() {
 
 }
 
-function addToCartClicked(title, price) {
-    // const details = item.split(',');
-    // let title = details[0];
-    // let price = details[1];
+function addToCartClicked(title, itemCode, price) {
     let imageSrc = 'https://data.thefeedfeed.com/static/2019/06/05/15597629795cf81823d037c.jpg';
     let quantity = 1;
-    addItemToCart(title, price, imageSrc, quantity);
+    addItemToCart(title, itemCode, price, imageSrc, quantity);
     updateCartTotal();
+
 }
 
-// function addToCartClicked(event) {
-// let buttonClicked = event.target;
-// let shopItem = buttonClicked.parentElement.parentElement;
-// let title = shopItem.getElementsByClassName('shop-item-title')[0].innerText;
-// let price = shopItem.getElementsByClassName('shop-item-price')[0].innerText;
-// let imageSrc = shopItem.getElementsByClassName('shop-item-image')[0].src;
-// let quantity=1;
-// addItemToCart(title, price, imageSrc, quantity);
-// updateCartTotal();
-// }
-
-function addToCartClickedFromSearching(event) {
-    let buttonClicked = event.target;
-    let itemFound = buttonClicked.parentElement.parentElement;
-    let itemName = itemFound.getElementsByClassName('item-name')[0].innerText;
-    let price = itemFound.getElementsByClassName('item-price')[0].innerText;
-    let quantity = parseInt(itemFound.getElementsByClassName('cart-quantity-input')[0].value);
-    let image = itemFound.getElementsByClassName('item-image')[0].src;
-    addItemToCart(itemName, price, image, quantity);
-    updateCartTotal();
-}
-
-function addItemToCart(title, price, imageSrc, quantity) {
+function addItemToCart(title, itemCode, price, imageSrc, quantity) {
     let cartRow = document.createElement('div');
     cartRow.classList.add('cart-row');
     let cartItems = document.getElementsByClassName('cart-items')[0];
@@ -158,21 +130,21 @@ function addItemToCart(title, price, imageSrc, quantity) {
     }
     cartRow.innerHTML = `
 <div class="cart-item cart-column ">
-    <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
     <span class="cart-item-title">${title}</span>
+    <span class="cart-item-code">${itemCode}</span>
+    
+     <img class="cart-item-image" src="${imageSrc}" width="100" height="100">
 </div>
   <span class="cart-price cart-column">${price}</span>
 <div class="cart-quantity cart-column">
 
-    <input class="cart-quantity-input " type="number" value=${quantity}>
-    <button class="button button-danger" type="button">REMOVE</button>
+    <input id="quantity" class="cart-quantity-input " type="number" value=${quantity} onchange="quantityChanged('${title}')">
+    <button class="button button-danger" type="button" onclick="removeCartItemEvent('${title}')">REMOVE</button>
 </div>`;
+
     cartItems.append(cartRow);
-    cartRow.getElementsByClassName("button-danger")[0].addEventListener('click', removeCartItemEvent);
-    cartRow.getElementsByClassName("cart-quantity-input")[0].addEventListener('change', quantityChanged);
-  //  cart.push({title: title, quantity:quantity, price: price});
-    // window.alert(cart[1].title);
-    // window.alert(totalBill);
+    updateCartTotal();
+    cart.push({title: title, itemCode: itemCode, quantity: quantity, price: price});
 }
 
 function updateCartTotal() {
@@ -186,12 +158,11 @@ function updateCartTotal() {
         let price = parseFloat(priceElement.innerText.replace('$', ''));
         let quantity = quantityElement.value;
         total = total + (price * quantity);
-        // window.alert(quantity);
     }
+    billInfo.totalBill = total;
     total = Math.round(total * 100) / 100;
     document.getElementsByClassName('cart-total-price')[0].innerText = '$' + total;
     countItems();
-    // totalBill = totalBill+total;
 
 }
 
@@ -229,9 +200,11 @@ function searchingBeverage(itemName) {
         const textString = text.split(",");
         let searchingResult = document.getElementsByClassName("result")[0];
 
+        let itemCode = textString[0];
         let name = textString[1];
         let price = textString[2];
         searchingResult.getElementsByClassName("item-name")[0].innerHTML = name;
+        searchingResult.getElementsByClassName("item-code")[0].innerHTML = itemCode;
         searchingResult.getElementsByClassName("item-price")[0].innerHTML = price;
 
     };
@@ -273,10 +246,12 @@ function getMenu() {
                 const items = text.split(",");
                 let item = document.createElement('div');
                 item.classList.add('shop-item');
+                let itemCode = items[0];
                 let title = items[1];
                 let price = items[2];
                 item.innerHTML = `
                             <span class="shop-item-title">${title}</span>
+                            <span class="shop-item-code">${itemCode}</span>
 
                             <img class="shop-item-image"
                                 src="https://www.dominosugar.com/emshare/views/modules/asset/downloads/originals/2021/07/79150/Brown_Sugar_Hojicha_Boba_Milk_Tea_600x400.jpg/Brown_Sugar_Hojicha_Boba_Milk_Tea_600x400.jpg"
@@ -284,7 +259,7 @@ function getMenu() {
 
                             <div class="shop-item-detail">
                                 <span class="shop-item-price">${price}</span>
-                                <button class="button button-primary shop-item-button" type="button" onclick="addToCartClicked('${title}','${price}')">Add To Cart</button>
+                                <button class="button button-primary shop-item-button" type="button" onclick="addToCartClicked('${title}','${itemCode}','${price}')">Add To Cart</button>
 
                             </div>`;
                 shopItems.append(item);
@@ -297,7 +272,7 @@ function getMenu() {
     xHttp.send();
 }
 
-function receiveOrderFromCustomer(phone, customerInfo) {
+function receiveOrderFromCustomer() {
     const xHttp = new XMLHttpRequest();
     xHttp.open("POST", "http://localhost:8080/store-order/add", true);
     xHttp.setRequestHeader("Accept", "application/json");
@@ -308,8 +283,32 @@ function receiveOrderFromCustomer(phone, customerInfo) {
             window.alert(xHttp.responseText);
         }
     };
+    const payLoad = createPayloadForCustomerOrder();
+    xHttp.send(payLoad);
+    let cartItems = document.getElementsByClassName('cart-items')[0];
+    while (cartItems.hasChildNodes()) {
+        cartItems.removeChild(cartItems.firstChild);
+    }
+    for (let i = 0; i < cart.length; i++) {
+        cart.pop();
+    }
+    billInfo.totalBill = 0;
+    updateCartTotal();
 }
 
-function createPayLoadForCustomerOrder(phone){
+function createItemsForCustomerOrder() {
+    let itemText = '"items":[';
+    for (let i = 0; i < cart.length; i++) {
+        let item = cart[i];
 
+        itemText += '{"itemCode": "' + item.itemCode + '","itemName": "' + item.title + '", ' + '"quantity":' + item.quantity + ',"price":' + item.price + '}';
+        if (i < cart.length - 1) {
+            itemText += ',';
+        }
+    }
+    return itemText + "]}";
+}
+
+function createPayloadForCustomerOrder() {
+    return customerInfo + getBill() + createItemsForCustomerOrder();
 }
