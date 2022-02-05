@@ -4,50 +4,40 @@
 /*jshint sub:true*/
 /*globals $:false */
 
-const hamburger = document.querySelector('.header .nav-bar .nav-list .hamburger');
-const mobile_menu = document.querySelector('.header .nav-bar .nav-list ul');
-const header = document.querySelector('.header .container');
-const menu_item = document.querySelectorAll('.header .nav-bar .nav-list ul li a');
 
-hamburger.addEventListener('click',()=> {
-    hamburger.classList.toggle('active');
-    mobile_menu.classList.toggle('active');
-});
 
-document.addEventListener('scroll', ()=>{
-    let scroll_position = window.scrollY;
-    if(scroll_position>250){
-        header.style.backgroundColor ='#29323c';
-    }
-    else {
-        header.style.backgroundColor ='transparent';
-    }
-});
-
-// document.addEventListener('click',()=>{
-//     mobile_menu.animate()
-// })
-
-menu_item.forEach((item) => {
-    item.addEventListener('click', () => {
-        hamburger.classList.toggle('active');
-        mobile_menu.classList.toggle('active');
-    });
-});
-
-$(document).ready(function () {
-    $("a").on('click', function (event) {
-        if(this.hash !==""){
-            event.preventDefault();
-            let hash = this.hash;
-            $('html, body').animate({
-                scrollTop: $(hash).offset().left
-            }, 300, function () {
-                window.location.hash=hash;
-            });
+$(window).on('load', function () {
+    $.get("http://localhost:8080/vitamin-bar/allMainBeverageName", function (data) {
+        for (let i = 0; i < data.length; i++) {
+            let beverageName = data[i];
+            $(".menu-btns").append('<button class="menu-btn" >' + beverageName + '</button>');
         }
     });
 });
 
-
-
+$(window).on('load', function () {
+    $.get('http://localhost:8080/vitamin-bar/get-details/Milk tea', function (data) {
+        let allItems = '';
+        for (let i = 0; i < data.length; i++) {
+            let item = data[i];
+            let itemCode = item["itemCode"];
+            let itemTitle = item["name"];
+            let itemPrice = item["price"];
+            allItems +=
+                ' <div class="shop-item">\n' +
+                '                <span class="shop-item-title">' + itemTitle + '</span>\n' +
+                '                <span class="shop-item-code">' + itemCode + '</span>\n' +
+                '                <img class="shop-item-image"\n' +
+                '                     src="https://media.istockphoto.com/photos/fruit-juice-picture-id155376375?k=20&m=155376375&s=612x612&w=0&h=xvxdLKu8FQHp0zxAyxD26Nq8MLLsWee7oN7cqJy9KT0="\n' +
+                '                     width="400" height="250">\n' +
+                '                <div class="shop-item-detail">\n' +
+                '                    <span class="shop-item-price">' + itemPrice + '</span>\n' +
+                '                    <button class="button button-primary shop-item-button"\n' +
+                '                            onclick="addToCartClicked('+itemTitle+','+itemCode+','+itemPrice+')">Add To Cart\n' +
+                '                    </button>\n' +
+                '                </div>\n' +
+                '            </div>';
+        }
+        $('.menu-bottom').append(allItems);
+    });
+});
