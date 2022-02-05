@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WelCome to Vitamin Bar</title>
+    <link rel="stylesheet" href="onePageStyle.css">
+    <script src="onePageJs.js" async></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+<!--Header-->
+<section id="header">
+    <div class="header container">
+        <div class="nav-bar">
+            <div class="brand">
+                <a href="#welcome">
+                    <h1>VITAMIN BAR</h1>
+                </a>
+            </div>
+            <div class="nav-list">
+                <div class="hamburger">
+                    <div class="bar"></div>
+                </div>
+                <ul>
+                    <li><a href="#welcome" data-after="Welcome">Welcome</a></li>
+                    <li><a href="#menu"data-after="Menu">Menu</a></li>
+                    <li><a href="#contact" data-after="Contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!--End of header-->
+<section id="welcome">
+    <div class="welcome container">
+        <div>
+            <h1>Welcome<span></span></h1>
+            <h1>to<span></span></h1>
+            <h1>Vitamin Bar<span></span></h1>
+            <button class="order-menu-btn" href=""> Order Now</button>
+        </div>
+    </div>
+</section>
+<section id="menu">
+    <div class="menu container">
+        <div class="menu-top">
+            <h1 class="session-title">Menu</h1>
+            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ipsum deleniti maiores pariatur assumenda quas
+                magni et, doloribus quod voluptate quasi molestiae magnam officiis dolorum, dolor provident atque
+                molestias voluptatum explicabo!</p>
+            <div class="menu-btns">
+                <button class="menu-btn">Juice</button>
+                <button class="menu-btn">Milk Tea</button>
+                <button class="menu-btn">Smoothie</button>
+            </div>
+
+        </div>
+        <div class="menu-bottom">
+            <h3 class="type-name"></h3>
+
+            <div class="shop-item">
+                <span class="shop-item-title">Coconut Milk Tea</span>
+                <span class="shop-item-code">MT01</span>
+                <img class="shop-item-image"
+                     src="https://media.istockphoto.com/photos/fruit-juice-picture-id155376375?k=20&m=155376375&s=612x612&w=0&h=xvxdLKu8FQHp0zxAyxD26Nq8MLLsWee7oN7cqJy9KT0="
+                     width="400" height="250">
+                <div class="shop-item-detail">
+                    <span class="shop-item-price">$10.0</span>
+                    <button class="button button-primary shop-item-button"
+                            onclick="addToCartClicked('${title}','${itemCode}','${price}')">Add To Cart
+                    </button>
+                </div>
+            </div>
+            <div class="shop-item">
+                <span class="shop-item-title">Mango Milk Tea</span>
+                <span class="shop-item-code">MT02</span>
+                <img class="shop-item-image"
+                     src="https://media.istockphoto.com/photos/fruit-juice-picture-id155376375?k=20&m=155376375&s=612x612&w=0&h=xvxdLKu8FQHp0zxAyxD26Nq8MLLsWee7oN7cqJy9KT0="
+                     width="400" height="250">
+                <div class="shop-item-detail">
+                    <span class="shop-item-price">$12.0</span>
+                    <button class="button button-primary shop-item-button" type="button"
+                            onclick="addToCartClicked('${title}','${itemCode}','${price}')">Add To Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container contact">
+        <div><h1 class="session-title">Contact Us</h1></div>
+        <div class="contact-items">
+            <div class="contact-item">
+                <div class="icon">
+                    <img src="https://img.icons8.com/dusk/64/000000/ringing-phone.png"/></div>
+                <div class="contact-info">
+                    <h1>Phone</h1>
+                    <h2>0212971569</h2>
+                </div>
+            </div>
+            <div class="contact-item">
+                <div class="icon">
+                    <a href="https://www.facebook.com/profile.php?id=100003049977515">
+                        <img src="https://img.icons8.com/clouds/100/000000/facebook-new.png"/>
+                    </a>
+                </div>
+                <div class="contact-info">
+                    <h1>Facebook</h1>
+                    <h2>Click to the icon, please!</h2>
+                </div>
+
+            </div>
+            <div class="contact-item">
+                <div class="icon"><img src="https://img.icons8.com/bubbles/50/000000/order-delivered.png"/></div>
+                <div class="contact-info">
+                    <h1>Address</h1>
+                    <h2>87B Fairview Avenue Fairview Heights Auckland 0632 New Zealand</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
