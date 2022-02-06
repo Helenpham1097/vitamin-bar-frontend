@@ -9,6 +9,7 @@
 html {
     font-size: 12px;
     font-family: 'Source Sans Pro', sans-serif;
+    scroll-behavior: smooth;
 }
 
 a {
@@ -301,6 +302,10 @@ a {
     border: 2px solid green;
     background-color:transparent;
 
+}
+
+#menu .menu-btn:focus{
+    background-color: limegreen;
 }
 
 #menu .menu-btn:hover{
