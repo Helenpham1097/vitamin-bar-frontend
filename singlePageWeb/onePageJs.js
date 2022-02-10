@@ -49,6 +49,24 @@
 // });
 
 
+function countItemsInCart() {
+    let itemsInCart = $('.cart-items').find('.cart-row');
+    let count = 0;
+    for (let i = 0; i < itemsInCart.length; i++) {
+        let item = itemsInCart[i];
+        let quantity = parseInt($(item).find('.cart-quantity-input').val());
+        count += quantity;
+    }
+    if (count !== 0) {
+        $('.badge').show();
+        $('.badge').text(count);
+
+    } else {
+        $('.badge').hide();
+    }
+
+}
+
 function openCart() {
     $("#my-cart").show();
 }
@@ -92,7 +110,8 @@ function quantityChanged(title) {
     for (let i = 0; i < $('.cart-item-title').length; i++) {
         if ($(cartItemName[i]).text() === title) {
             let item = $(cartItemName[i]).parent().parent().find('.cart-quantity-input').val();
-            window.alert(item);
+            // window.alert($(cartItemName[i]).parent().parent().find('.cart-quantity-input'));
+            // window.alert(item);
             quantity = item;
         }
     }
@@ -131,7 +150,8 @@ function updateCartTotal() {
         total = total + (price * quantity);
     }
     total = Math.round(total * 100) / 100;
-   $('.cart-total-price').text('$' + total);
+    $('.cart-total-price').text('$' + total);
+    countItemsInCart();
 }
 
 $(document).ready(function () {

@@ -1,16 +1,20 @@
-.cart-btn{
-    position: fixed;
-    top: 23px;
-    right: 28px;
-}
+/*.cart-btn{*/
+/*    position: fixed;*/
+/*    top: 23px;*/
+/*    right: 28px;*/
+/*}*/
+
+
 .cart-popup{
     display: none;
     position: absolute;
+    min-width: 500px;
     top: 50px;
     right: 0px;
     /*border: 3px solid #f1f1f1;*/
-    background-color: white;
-    z-index: 9;
+    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
+    /*background-color: white;*/
+    z-index: 7;
     /*display: none;*/
     /*position: absolute;*/
     /*background-color: lightpink;*/
@@ -26,6 +30,18 @@
     border: none;
     border-radius: 50%;
 
+}
+
+.cart-notification .badge{
+    display: none;
+    position: absolute;
+    /*top: 1px;*/
+    /*right: 1px;*/
+    font-size: 1.3rem;
+    padding: 5px 5px;
+    border-radius: 50%;
+    background-color: red;
+    color: white;
 }
 .cart-purchase-btn{
     display: block;
