@@ -3,36 +3,32 @@
 /*    top: 23px;*/
 /*    right: 28px;*/
 /*}*/
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@200&display=swap');
 
+* {
+    font-family: 'Source Sans Pro', sans-serif;
+}
 
-.cart-popup{
+.cart-popup {
     display: none;
     position: absolute;
     min-width: 500px;
-    top: 50px;
+    top: 100px;
     right: 0px;
-    /*border: 3px solid #f1f1f1;*/
-    background: linear-gradient(to bottom right, #E3F0FF, #FAFCFF);
-    /*background-color: white;*/
     z-index: 7;
-    /*display: none;*/
-    /*position: absolute;*/
-    /*background-color: lightpink;*/
-    /*min-width: 150px;*/
-    /*box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);*/
-    /*z-index: 9;*/
+    background-color: rgba(31, 30, 30, 0.6);
 
 }
-.cart-box{
+
+.cart-box {
     max-width: 1000px;
     padding: 10px;
-    /*background-color: rosybrown;*/
     border: none;
-    border-radius: 50%;
+    /*border-radius: 50%;*/
 
 }
 
-.cart-notification .badge{
+.cart-notification .badge {
     display: none;
     position: absolute;
     /*top: 1px;*/
@@ -43,22 +39,24 @@
     background-color: red;
     color: white;
 }
-.cart-purchase-btn{
+
+.cart-purchase-btn {
     display: block;
-    font-size: 1.0em;
-    font-family: 'Luxurious Roman', cursive;
+    font-size: 1.7rem;
+    font-family: 'Source Sans Pro', sans-serif;
     vertical-align: bottom;
     float: left;
     padding-left: 10px;
     color: black;
-    background-color: palevioletred;
+    background-color: white;
     font-weight: bold;
-    width: 100px;
+    width: 140px;
 }
-.close-cart-btn{
+
+.close-cart-btn {
     display: block;
-    font-size: 1.0em;
-    font-family: 'Luxurious Roman', cursive;
+    font-size: 1.7em;
+    font-family: 'Source Sans Pro', sans-serif;
     vertical-align: bottom;
     float: left;
     color: white;
@@ -67,7 +65,8 @@
     width: 100px;
     float: right;
 }
-.searching-popup{
+
+.searching-popup {
     display: none;
     position: absolute;
     top: 0;
@@ -76,54 +75,52 @@
     background-color: white;
     z-index: 9;
 }
-.searching-box{
+
+.searching-box {
     max-width: 1000px;
     padding: 10px;
     /*background-color: rosybrown;*/
     border: none;
 }
-.item-name{
+
+.item-name {
     display: block;
     text-align: center;
     font-weight: bold;
     color: #333333;
     margin-bottom: 15%;
 }
-.item-code{
+
+.item-code {
     display: block;
     text-align: center;
     font-weight: bold;
     color: #333333;
     margin-bottom: 15%;
 }
-.item-price{
+
+.item-price {
     color: #333333;
     flex-grow: 1;
 }
-.item-image{
+
+.item-image {
     height: 250px;
     border-radius: 80%
 }
-.add-btn-from-searching{
 
-}
-.close-searching-btn{
+.close-searching-btn {
     position: absolute;
     bottom: 0;
-    right:0;
+    right: 0;
     border: none;
     border-radius: 50%;
 }
 
 
-
-
-
-
-
 .cart-row {
     display: flex;
-    background-color: white;
+    background-color: rgba(31, 30, 30, 0.6);
 }
 
 .cart-column {
@@ -142,6 +139,8 @@
 
 .cart-price {
     width: 20%;
+    color: white;
+    font-size: 1.7rem;
 }
 
 .cart-quantity {
@@ -152,9 +151,15 @@
 /*    width: 25%;*/
 /*}*/
 .cart-item-title {
-    color: #333;
+    color: white;
     margin-left: .5em;
-    font-size: 1.2em;
+    font-size: 1.7rem;
+}
+
+.cart-item-code {
+    font-weight: bold;
+    font-size: 1.7rem;
+    color: white;
 }
 
 .cart-item-image {
@@ -165,8 +170,8 @@
 
 .cart-header {
     font-weight: bold;
-    font-size: 1.25em;
-    color: #333;
+    font-size: 2rem;
+    color: white;
 }
 
 .cart-total {
@@ -184,15 +189,15 @@
 }
 
 .cart-total-price {
-    color: #333;
-    font-size: 1.15em;
+    color: white;
+    font-size: 1.7rem;
 }
 
 .button-purchase {
     display: block;
     margin: 40px auto 80px auto;
-    font-size: 1.75em;
-    font-family: 'Luxurious Roman', cursive;
+    font-size: 2rem;
+    /*font-family: 'Luxurious Roman', cursive;*/
 }
 
 .cart-quantity-input {
@@ -236,14 +241,14 @@
 
 .cart-total-title {
     font-weight: bold;
-    font-size: 1.5em;
-    color: black;
+    font-size: 2rem;
+    color: white;
     margin-right: 20px;
 }
 
 .cart-total-price {
-    color: #333;
-    font-size: 1.1em;
+    color: white;
+    font-size: 2rem;
 }
 
 .text-box {
@@ -302,6 +307,38 @@
     font-size: 2.5em;
 }
 
+.searching-img {
+    width: 20px;
+    height: 20px;
+    position: initial;
+    float: bottom;
+}
+
+.searching-text {
+    height: 28px;
+    width: 200px;
+    background-color: rgba(31, 30, 30, 0.3);
+    float: bottom;
+    border: none;
+    margin-top: 8px;
+    font-size: 17px;
+    border: none;
+    margin-bottom:0;
+
+}
+.searching button{
+    float: right;
+    padding: 6px 10px;
+    margin-top: 8px;
+    margin-right: 16px;
+    background: #ddd;
+    font-size: 12px;
+    border: none;
+    cursor: pointer;
+}
+.searching button:hover{
+    background: #ccc;
+}
 
 
 

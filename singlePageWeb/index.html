@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="onePageStyle.css">
     <link rel="stylesheet" href="vitaminBarCart.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.1/css/all.css" crossorigin="anonymous">
     <script src="onePageJs.js"></script>
 </head>
 <body>
@@ -17,6 +18,36 @@
                 <a href="#welcome">
                     <h1>VITAMIN BAR</h1>
                 </a>
+<!--                searching pop up-->
+                <form class="searching">
+                    <input class="searching-text" type="text" placeholder="Searching...">
+                    <button type="button" onclick="searchBeverage($('.searching-text').val())">
+                        <i class="fas fa-search"></i></button>
+                </form>
+                <div class="searching-popup" id="searching-popup">
+                    <div class="searching-box">
+                        <div class="result">
+
+                            <span class="item-name"></span>
+                            <span class="item-code"></span>
+
+                            <img class="item-image"
+                                 src="https://media.istockphoto.com/photos/fruit-juice-picture-id155376375?k=20&m=155376375&s=612x612&w=0&h=xvxdLKu8FQHp0zxAyxD26Nq8MLLsWee7oN7cqJy9KT0="
+                                 width="300" height="250">
+                            <div>
+                                <span class="item-price"></span>
+                                <input class="cart-quantity-input " type="number" value="1">
+                                <button class=" button button-primary add-btn-from-searching" type="button"
+                                        onclick="addItemToCart(($('.result').find('.item-name')).text(),
+                                                               ($('.result').find('.item-code')).text(),
+                                                               ($('.result').find('.item-price')).text(),
+                                                               ($('.result').find('.cart-quantity-input')).val())">Add To Cart</button>
+                            </div>
+                            <button class="close-searching-btn" type="button" onclick="closeSearching()"><i
+                                    class="far fa-times-circle"></i></button>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="nav-list">
                 <div class="hamburger">
@@ -33,6 +64,25 @@
                 </ul>
             </div>
         </div>
+    </div>
+    <!--Cart pop up-->
+    <div class="cart-popup" id="my-cart">
+        <div class="cart-row cart-box">
+            <span class="cart-item cart-header cart-column">Item</span>
+            <span class="cart-price cart-header cart-column">Price</span>
+            <span class="cart-quantity cart-header cart-column">Quantity</span>
+            <!--        <span class="cart-total-per-item cart-header cart-column">TOTAL</span>-->
+        </div>
+        <div class="cart-items">
+        </div>
+
+        <div class="cart-total">
+            <strong class="cart-total-title">Total</strong>
+            <span class="cart-total-price">$0</span>
+        </div>
+        <button class="cart-purchase-btn" type="button" onclick="makeAnOrder()">Purchase</button>
+        <!--    <button class="cart-purchase-btn" type="button"  id ='cart-purchase-btn-id'>Purchase</button>-->
+        <button class="close-cart-btn" type="button" onclick="closeCart()">Close</button>
     </div>
 </section>
 <!--End of header-->
@@ -63,25 +113,7 @@
     </div>
 </section>
 
-<!--Cart pop up-->
-<div class="cart-popup" id="my-cart">
-    <div class="cart-row cart-box">
-        <span class="cart-item cart-header cart-column">Item</span>
-        <span class="cart-price cart-header cart-column">Price</span>
-        <span class="cart-quantity cart-header cart-column">Quantity</span>
-        <!--        <span class="cart-total-per-item cart-header cart-column">TOTAL</span>-->
-    </div>
-    <div class="cart-items">
-    </div>
 
-    <div class="cart-total">
-        <strong class="cart-total-title">Total</strong>
-        <span class="cart-total-price">$0</span>
-    </div>
-    <button class="cart-purchase-btn" type="button" onclick="receiveOrderFromCustomer()">Purchase</button>
-    <!--    <button class="cart-purchase-btn" type="button"  id ='cart-purchase-btn-id'>Purchase</button>-->
-    <button class="close-cart-btn" type="button" onclick="closeCart()">Close</button>
-</div>
 
 
 

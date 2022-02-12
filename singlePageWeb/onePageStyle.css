@@ -46,6 +46,9 @@ a {
     background-color: rgba(31, 30, 30, 0.6);
 }
 
+/*#header .nav-list ul li a: {*/
+/*    color: greenyellow;*/
+/*}*/
 #header .nav-bar {
     display: flex;
     align-items: center;
@@ -580,3 +583,6 @@ a {
     }
 }
 /*end of media query fir desktop*/
+
+
+

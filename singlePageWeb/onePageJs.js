@@ -47,7 +47,43 @@
 //         }
 //     });
 // });
+const cart = [];
+const customerInfo = {
+    phone: "19971984", name: "Pham Huynh", dateOfBirth: "1984-08-03",
+    email: "hellohjuynmamah12345@gmail.com", deliveryAddress: "2432 Eastcoaste Road, Auckland", point: 0
+};
+const billInfo = {orderNumber: "HELENTHAY1012987", totalBill: 0};
 
+
+function searchBeverage(itemName) {
+    if (itemName === '') {
+        window.alert("No item was found");
+        $('.searching-popup').hide();
+    } else {
+        $.get("http://localhost:8080/vitamin-bar/" + itemName)
+            .done(function (data) {
+                const foundItem = JSON.parse(JSON.stringify(data));
+
+                let itemArray = "";
+                for (const x in foundItem) {
+                    itemArray += foundItem[x] + ",";
+                }
+                const stringResult = itemArray.split(",");
+                ($('.result').find('.item-name')).text(stringResult[1]);
+                ($('.result').find('.item-code')).text(stringResult[0]);
+                ($('.result').find('.item-price')).text(stringResult[2]);
+                $('.searching-popup').show();
+
+            })
+            .fail(function () {
+                window.alert("Beverage was not found");
+            });
+    }
+}
+
+function closeSearching() {
+    document.getElementById('searching-popup').style.display = "none";
+}
 
 function countItemsInCart() {
     let itemsInCart = $('.cart-items').find('.cart-row');
@@ -101,6 +137,7 @@ function addItemToCart(title, itemCode, price, quantity) {
                                 <button class="button button-danger" type="button" onclick="removeCartItemEvent('${title}')">REMOVE</button>
                             </div>
                         </div>`);
+    cart.push({itemCode: itemCode, itemName: title, quantity: quantity, price: price});
     updateCartTotal();
 }
 
@@ -110,18 +147,16 @@ function quantityChanged(title) {
     for (let i = 0; i < $('.cart-item-title').length; i++) {
         if ($(cartItemName[i]).text() === title) {
             let item = $(cartItemName[i]).parent().parent().find('.cart-quantity-input').val();
-            // window.alert($(cartItemName[i]).parent().parent().find('.cart-quantity-input'));
-            // window.alert(item);
             quantity = item;
         }
     }
 
-    // for (let i = 0; i < cart.length; i++) {
-    //     const item = cart[i];
-    //     if (item.title == title) {
-    //         item.quantity = quantity;
-    //     }
-    // }
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (item.title == title) {
+            item.quantity = quantity;
+        }
+    }
     updateCartTotal();
 }
 
@@ -132,15 +167,20 @@ function removeCartItemEvent(title) {
         }
     }
     updateCartTotal();
-    // for (let i = 0; i < cart.length; i++) {
-    //     const item = cart[i];
-    //     if (item.title == title) {
-    //         cart.splice(i, 1);
-    //     }
-    // }
+    for (let i = 0; i < cart.length; i++) {
+        const item = cart[i];
+        if (item.title == title) {
+            cart.splice(i, 1);
+        }
+    }
 }
 
 function updateCartTotal() {
+    if ($('.cart-items').is(':empty')) {
+        window.alert("cart");
+        $('.cart-total-price').text('$' + 0);
+        $('.badge').hide();
+    }
     let cartRows = $('.cart-items').find('.cart-row');
     let total = 0;
     for (let i = 0; i < cartRows.length; i++) {
@@ -151,8 +191,76 @@ function updateCartTotal() {
     }
     total = Math.round(total * 100) / 100;
     $('.cart-total-price').text('$' + total);
+    billInfo.totalBill = total;
     countItemsInCart();
 }
+
+function makeAnOrder() {
+    $.ajax({
+        type: "POST",
+        url: "http://localhost:8080/store-order/add",
+        data: JSON.stringify({
+            phone: customerInfo.phone,
+            customer: {
+                name: customerInfo.name,
+                dateOfBirth: customerInfo.dateOfBirth,
+                phone: customerInfo.phone,
+                email: customerInfo.email,
+                deliveryAddress: customerInfo.email,
+                point: customerInfo.point
+            },
+            order: {
+                orderNumber: billInfo.orderNumber,
+                totalBill: billInfo.totalBill
+            },
+            items: cart
+        }),
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function () {
+            window.alert("Thank you for shopping with us");
+        },
+        error: function (err) {
+            window.alert(err);
+        }
+    });
+    let cartItems = $('.cart-items').find('.cart-row');
+    for (let i = 0; i < cartItems.length; i++) {
+        let cartItem = cartItems[i];
+        $(cartItem).remove();
+    }
+    for (let i = 0; i < cart.length; i++) {
+        cart.pop();
+    }
+    billInfo.totalBill = 0;
+    updateCartTotal();
+}
+
+//     $.post("http://localhost:8080/store-order/add", {
+//         data: JSON.stringify({
+//             phone: customerInfo.phone,
+//             customer: {
+//                 name: customerInfo.name,
+//                 dateOfBirth: customerInfo.dateOfBirth,
+//                 phone: customerInfo.phone,
+//                 email: customerInfo.email,
+//                 deliveryAddress: customerInfo.email,
+//                 point: customerInfo.point
+//             },
+//             order: {
+//                 orderNumber: billInfo.orderNumber,
+//                 totalBill: billInfo.totalBill
+//             },
+//             items:cart
+//         }),
+//         contentType: "application/json; charset=utf-8",
+//         dataType: "json",
+//         function(status) {
+//             window.alert(status);
+//         }
+//     });
+// }
+
 
 $(document).ready(function () {
 
